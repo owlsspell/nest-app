@@ -1,0 +1,48 @@
+version: "3.7"
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres_db
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  server:
+    image: node:21-alpine3.17
+    ports:
+      - "5000:5000"
+    working_dir: /code/server
+    volumes:
+      - ./server:/code/server
+      # - /code/server/node_modules
+    depends_on:
+      - postgres
+    command: yarn start-docker-windows:dev
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: always
+  frontend:
+    image: node:21-alpine3.17
+    command: yarn dev-window
+    working_dir: /code/frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/code/frontend
+      # - /code/frontend/node_modules
+    depends_on:
+      - postgres
+      - server
+    restart: always
+volumes:
+  postgres_data:
+  # node_modules:
