@@ -1,33 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Swiper from './components/Swiper'
 import './App.css'
+import Navbar from './components/Navbar'
+import AddSection from './components/AddSection'
+import Footer from './components/Footer'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Navbar />
+      <div className='bg-gradient-to-b from-primary from-70% to-base-100 h-[calc(100vh-125px)] grid grid-cols-1 md:grid-cols-3 grid-rows-1 p-10'>
+        <div className='col-span-1 md:col-span-2 my-auto md:p-10' >
+          <Swiper />
+        </div>
+        <div className='col-span-1 my-auto p-5 mr-5'>
+          <h1 className='text-2xl text-right md:text-6xl	'>Book store</h1>
+          <p className='text-xl text-right mt-3'>Magic book app</p>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <AddSection />
+      <Footer />
     </>
   )
 }
