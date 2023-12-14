@@ -36,9 +36,11 @@ export class UsersService {
       await this.usersRepository.save({
         ...createUserDto,
         password: hash,
+        isActive: true,
       });
       return 'success';
-    } catch {
+    } catch (e) {
+      console.log(e);
       return new UnauthorizedException();
     }
   }
