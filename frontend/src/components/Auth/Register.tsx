@@ -1,13 +1,14 @@
 import { useState } from "react"
 import hidden from "../../assets/icons/hidden.png"
 import google from "../../assets/icons/google.png"
-import { Field, Form, Formik, FormikProps, FormikValues } from "formik"
+import { Field, Form, Formik, FormikProps } from "formik"
 import * as Yup from 'yup';
-import { createUser } from './../../../api/api';
+import { createUser, signInJWT, submitGoggle } from '../../services/api';
 import Swal from "sweetalert2";
+import { setToLocalStorage } from "../../services/functions";
 
 type InputsType = {
-    email: string, password: string, confirm: string, agree: boolean
+    email: string, password: string, confirm: string, agree: boolean,
 }
 
 export default function Register({ modal }) {
@@ -27,17 +28,38 @@ export default function Register({ modal }) {
         agree: Yup.bool().oneOf([true], 'Field must be checked')
     });
 
+
+    const handleButtonClick = async (
+        type: "jwt" | "google",
+        formikProps: FormikProps<InputsType>
+    ) => {
+        const { values, submitForm, setSubmitting } = formikProps;
+        console.log(type, values);
+
+        const getUserData = async () => {
+            switch (type) {
+                case 'jwt':
+                    await submitForm();
+                    break
+                case 'google':
+                    await submitGoggle()
+                    break
+            }
+        }
+
+        await getUserData()
+    }
+
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={SignupSchema}
-            onSubmit={(values, actions) => {
-                console.log({ values, actions });
+            onSubmit={async (values, actions) => {
+                console.log(123, { values, actions });
 
                 const { email, password } = values
-                // alert(JSON.stringify(values, null, 2));
-                // actions.setSubmitting(false);
                 modal.current?.close()
+                actions.setSubmitting(false);
                 Swal.showLoading();
                 Swal.fire({
                     title: 'Uploading...',
@@ -47,30 +69,43 @@ export default function Register({ modal }) {
                     showConfirmButton: false,
                 })
 
-                createUser({ email, password }).then(data => {
+                await createUser({ email, password }).then(data => {
                     console.log(data)
+                    if (data.message === "User already exists") throw new Error(data.message)
                     Swal.fire({
-                        title: data,
+                        title: data.status,
                         icon: "success",
                         timer: 2000,
                     })
+
                     actions.resetForm()
+                    return data
                 }).catch(err => {
-                    console.log(console.error(err)); Swal.fire({
-                        title: `Error ${err.message}`,
+                    console.log(console.error(err));
+                    Swal.fire({
+                        title: err.message,
                         icon: "error",
-                        timer: 2000,
+                        timer: 1000,
                     })
+                    setTimeout(() => modal.current?.showModal(), 1200)
                 })
+
+                const user = await signInJWT({ email, password })
+
+                setToLocalStorage(user)
+
 
             }}
         >
-            {({ touched, errors, isSubmitting }) => (
-                <Form>
+            {formikProps => {
+                const {
+                    touched, errors,
+                } = formikProps;
+                return <Form>
                     <div className="mx-6 mt-4">
 
                         <h3 className="font text-2xl leading-7 pt-2">Create <br />Account</h3>
-                        {console.log(touched, errors, isSubmitting)}
+                        {/* {console.log(touched, errors, isSubmitting)} */}
                         <Input label="Email" field="email" placeholder=" e.g. example@mail.com" />
                         {touched.email && errors.email && <div className="text-xs pt-1">{errors.email}</div>}
 
@@ -87,14 +122,15 @@ export default function Register({ modal }) {
                         </label>
                         {touched.agree && errors.agree && <div className="text-xs">{errors.agree}</div>}
 
-                        <button type="submit" className="btn btn-secondary w-full btn-sm my-3 hover:bg-base-100 hover:text-base-content">Create account</button>
-                        <button className="btn btn-outline btn-secondary w-full btn-sm">
+                        <button type="button" onClick={(e) => handleButtonClick("jwt", formikProps)} className="btn btn-secondary w-full btn-sm my-3 hover:bg-base-100 hover:text-base-content">Create account</button>
+                        <button type="button" onClick={(e) => handleButtonClick("google", formikProps)} className="btn btn-outline btn-secondary w-full btn-sm">
                             <img src={google} alt="google_icon" />
-                            <span className="my-auto pt-1"> Sign Up with Google</span></button>
+                            <a className="my-auto pt-1" href={import.meta.env.VITE_SERVER_API + "auth/google"}> Sign Up with Google</a></button>
 
                     </div>
                 </Form>
-            )}
+
+            }}
         </Formik>
     )
 }

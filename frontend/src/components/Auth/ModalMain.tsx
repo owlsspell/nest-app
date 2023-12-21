@@ -1,6 +1,7 @@
 export default function ModalMain({ setView }: { setView: (view: string) => void }) {
 
-    const setRegister = () => setView('register');
+    const setRegisterPage = () => setView('register');
+    const setLoginPage = () => setView('login');
 
     return (
         <>
@@ -9,8 +10,8 @@ export default function ModalMain({ setView }: { setView: (view: string) => void
                 <p className='text-lg'>Join us now and start Your Journey.</p>
             </div>
             <div className="my-8 pt-8 flex flex-col items-center">
-                <button className="btn btn-secondary btn-wide btn-sm my-3 hover:bg-base-100 hover:text-base-content" onClick={setRegister}>Create an account</button>
-                <button className="btn btn-outline btn-secondary btn-wide btn-sm">Sign in to your account</button>
+                <button className="btn btn-secondary btn-wide btn-sm my-3 hover:bg-base-100 hover:text-base-content" onClick={setRegisterPage}>Create an account</button>
+                <button className="btn btn-outline btn-secondary btn-wide btn-sm" onClick={setLoginPage}>Sign in to your account</button>
             </div>
             {/* <div className="modal-action">
                 <form method="dialog">

@@ -4,7 +4,7 @@ export default function AddSection() {
     return (
         <div className="hero min-h-screen bg-base-100">
             <div className="hero-content flex-col lg:flex-row-reverse pr-0 pl-10">
-                <img src="/images/preview.png" className="max-w-sm rounded-lg" />
+                <img src="/images/preview.png" className="max-w-sm rounded-lg w-full" />
                 <div className='md:mr-14'>
                     <h2 className="text-4xl font-bold"> Uncover Literary Treasures: Rare and New Books Now Available!</h2>
                     <p className="py-6">

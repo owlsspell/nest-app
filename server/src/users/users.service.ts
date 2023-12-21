@@ -24,13 +24,13 @@ export class UsersService {
   async create(
     @Body()
     createUserDto: CreateUserDto,
-  ): Promise<string | UnauthorizedException> {
+  ): Promise<{ status: string; email?: string } | UnauthorizedException> {
     console.log('createUserDto', createUserDto);
     const { email, password } = createUserDto;
 
     const user = await this.usersRepository.findOneBy({ email });
     if (user) return new ConflictException('User already exists');
-    if (!password) return 'need password';
+    if (!password) return { status: 'need password' };
     const hash = await bcrypt.hash(password, saltRounds);
     try {
       await this.usersRepository.save({
@@ -38,7 +38,7 @@ export class UsersService {
         password: hash,
         isActive: true,
       });
-      return 'success';
+      return { status: 'success', email };
     } catch (e) {
       console.log(e);
       return new UnauthorizedException();

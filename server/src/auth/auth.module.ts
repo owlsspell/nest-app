@@ -7,6 +7,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { User } from 'src/users/entities/user.entity';
 import { UsersModule } from 'src/users/users.module';
 import { UsersService } from 'src/users/users.service';
+import { PassportModule } from '@nestjs/passport';
+import { GoogleStrategy } from './google.strategy';
 
 @Module({
   imports: [
@@ -23,8 +25,9 @@ import { UsersService } from 'src/users/users.service';
       }),
       global: true,
     },
+    PassportModule,
   ],
-  providers: [AuthService, UsersService],
+  providers: [AuthService, UsersService, GoogleStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}
