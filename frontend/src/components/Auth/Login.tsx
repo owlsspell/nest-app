@@ -11,7 +11,7 @@ type InputsType = {
     email: string, password: string
 }
 
-export default function Login({ modal }) {
+export default function Login({ modal, setUser }) {
     const initialValues: InputsType = {
         email: "", password: ""
     }
@@ -61,6 +61,7 @@ export default function Login({ modal }) {
                         modal.current?.close()
                         if (data.status === 401) throw new Error(data.message)
 
+                        setUser(data)
                         setToLocalStorage(data)
                         Swal.fire({
                             title: 'Success',

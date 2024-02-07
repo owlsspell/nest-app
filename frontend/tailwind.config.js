@@ -12,6 +12,13 @@ export default {
   daisyui: {
     themes: [
       {
+        cream: {
+          "primary": "#47302f",
+          "primary-content": "#EFE3C8",
+          "secondary": "#EFE3C8",
+          "secondary-content": "#4A2B29",
+          "base-content": "#ffffff",
+        },
         chocolate: {
           "primary": "#47302f",
           "primary-content": "#EFE3C8",

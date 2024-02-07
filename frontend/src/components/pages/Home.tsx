@@ -6,7 +6,7 @@ import Navbar from '../Navbar'
 export default function Home() {
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className='bg-gradient-to-b from-primary from-70% to-base-100 max-h-[800px] md:max-h-full h-[calc(100vh-125px)] grid grid-cols-1 lg:grid-cols-3 grid-rows-1 p-10'>
                 <div className='col-span-1 md:col-span-2 my-auto md:p-10' >
                     <Swiper />
@@ -17,7 +17,7 @@ export default function Home() {
                 </div>
             </div>
             <AddSection />
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

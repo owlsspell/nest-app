@@ -11,7 +11,7 @@ type InputsType = {
     email: string, password: string, confirm: string, agree: boolean,
 }
 
-export default function Register({ modal }) {
+export default function Register({ modal, setUser }) {
 
     const initialValues: InputsType = {
         email: "", password: "", confirm: "", agree: false
@@ -92,8 +92,8 @@ export default function Register({ modal }) {
 
                 const user = await signInJWT({ email, password })
 
+                setUser(user)
                 setToLocalStorage(user)
-
 
             }}
         >
