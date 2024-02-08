@@ -10,24 +10,24 @@ const Dashboard = React.lazy(() => import("./components/Dashboard"))
 
 
 const router = createBrowserRouter([
-  // {
-  //   element: <Layout />,
-  //   errorElement: <Page404 />,
-  //   children: [
   {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/sign_in_google",
-    element: <SignInGoogle />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
-  //   ]
-  // }
+    element: <Layout />,
+    errorElement: <Page404 />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/sign_in_google",
+        element: <SignInGoogle />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

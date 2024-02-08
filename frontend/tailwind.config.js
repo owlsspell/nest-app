@@ -12,25 +12,26 @@ export default {
   daisyui: {
     themes: [
       {
-        cream: {
-          "primary": "#47302f",
-          "primary-content": "#EFE3C8",
-          "secondary": "#EFE3C8",
-          "secondary-content": "#4A2B29",
-          "base-content": "#ffffff",
+        custom: {
+          "primary": "#2B88D9",
+          "primary-content": "#fcfeff",
+          "secondary": "#ffffff",
+          "secondary-content": "#ffffff",
+          "base-content": "#767676",
+          "neutral-content": "#767676",
         },
-        chocolate: {
-          "primary": "#47302f",
-          "primary-content": "#EFE3C8",
-          "secondary": "#EFE3C8",
-          "secondary-content": "#4A2B29",
-          "base-content": "#EFE3C8",
-          "base-100": "#27181D",
-          "base-200": "#1E1E1E",
-        },
+        // chocolate: {
+        //   "primary": "#47302f",
+        //   "primary-content": "#EFE3C8",
+        //   "secondary": "#EFE3C8",
+        //   "secondary-content": "#4A2B29",
+        //   "base-content": "#EFE3C8",
+        //   "base-100": "#27181D",
+        //   "base-200": "#1E1E1E",
+        // },
       },
-      "dark",
-      "cupcake",
+      // "dark",
+      // "cupcake",
     ],
   },
 }

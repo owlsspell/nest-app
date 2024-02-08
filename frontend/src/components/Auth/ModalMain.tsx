@@ -6,11 +6,11 @@ export default function ModalMain({ setView }: { setView: (view: string) => void
     return (
         <>
             <div className="mx-8">
-                <h3 className=" text-2xl">Get Started!</h3>
-                <p className='text-lg'>Join us now and start Your Journey.</p>
+                <h3 className=" text-2xl text-white">Get Started!</h3>
+                <p className='text-lg text-white'>Join us now and start Your Journey.</p>
             </div>
             <div className="my-8 pt-8 flex flex-col items-center">
-                <button className="btn btn-secondary btn-wide btn-sm my-3 hover:bg-base-100 hover:text-base-content" onClick={setRegisterPage}>Create an account</button>
+                <button className="btn btn-outline btn-secondary btn-wide btn-sm my-3" onClick={setRegisterPage}>Create an account</button>
                 <button className="btn btn-outline btn-secondary btn-wide btn-sm" onClick={setLoginPage}>Sign in to your account</button>
             </div>
             {/* <div className="modal-action">

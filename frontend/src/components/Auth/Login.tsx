@@ -71,12 +71,13 @@ export default function Login({ modal, setUser }) {
                         actions.resetForm()
                     }).catch(err => {
                         console.log(console.error(err));
+                        modal.current?.close()
                         Swal.fire({
                             title: err.message,
                             icon: "error",
                             timer: 1000,
                         })
-                        setTimeout(() => modal.current?.showModal(), 1100)
+                        setTimeout(() => modal.current?.showModal(), 1000)
                     })
 
 
@@ -90,16 +91,16 @@ export default function Login({ modal, setUser }) {
                     return <Form>
                         <div className="mx-6 mt-4">
 
-                            <h3 className="font text-2xl leading-7 py-2 my-4">Sign In</h3>
+                            <h3 className="font text-2xl leading-7 py-2 my-4 text-white">Sign In</h3>
                             {/* {console.log(touched, errors, isSubmitting)} */}
                             <Input label="Email" field="email" placeholder=" e.g. example@mail.com" />
-                            {touched.email && errors.email && <div className="text-xs pt-1">{errors.email}</div>}
+                            {touched.email && errors.email && <div className="text-xs pt-1 text-white">{errors.email}</div>}
 
                             <Input label="Password" field="password" type="password" />
-                            {touched.password && errors.password && <div className="text-xs pt-1">{errors.password}</div>}
+                            {touched.password && errors.password && <div className="text-xs pt-1 text-white">{errors.password}</div>}
 
                             <div className="mt-6">
-                                <button type="button" onClick={() => handleButtonClick("jwt", formikProps)} className="btn btn-secondary w-full btn-sm my-3 hover:bg-base-100 hover:text-base-content">Sign In</button>
+                                <button type="button" onClick={() => handleButtonClick("jwt", formikProps)} className="btn btn-outline btn-secondary w-full btn-sm my-3">Sign In</button>
                                 <button type="button" onClick={() => handleButtonClick("google", formikProps)} className="btn btn-outline btn-secondary w-full btn-sm">
                                     <img src={google} alt="google_icon" />
                                     <a className="my-auto pt-1" href={import.meta.env.VITE_SERVER_API + "auth/google"}> Sign In with Google</a>
@@ -123,10 +124,10 @@ function Input({ type = 'text', placeholder = "", label, field }: InputType) {
 
         <label className="form-control w-full max-w-xs relative flex" htmlFor={field}>
             <div className="label pl-0 pt-2 pb-0.5 ">
-                <span className="label-text text-xs">{label}</span>
+                <span className="label-text text-xs text-white">{label}</span>
             </div>
 
-            <Field id={field} name={field} type={type !== 'password' ? type : isHidden ? "password" : 'text'} placeholder={placeholder} className="input input-secondary bg-secondary bg-opacity-20 input-sm input-bordered w-full max-w-xs rounded-md" />
+            <Field id={field} name={field} type={type !== 'password' ? type : isHidden ? "password" : 'text'} placeholder={placeholder} className="input input-secondary bg-secondary bg-opacity-20 input-sm input-bordered w-full max-w-xs rounded-md placeholder:text-white text-white" />
             {type === 'password' ? <button type="button" className="absolute bottom-2.5 right-2" onClick={() => toogleHidden(!isHidden)}><img src={hidden} alt="hidden_icon" /></button> : ""}
         </label>
 

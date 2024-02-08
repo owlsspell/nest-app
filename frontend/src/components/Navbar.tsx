@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import ModalLogin from './Auth/Modal';
 import { Link } from "react-router-dom";
+import logo from "/icons/logo.png"
 
 export default function Navbar() {
 
@@ -18,18 +19,18 @@ export default function Navbar() {
         const userData = localStorage.getItem('userData')
         if (userData) setUser(userData)
     }, [])
-
-    return <>
-        <div className="navbar my-2 mx-auto bg-primary rounded-md w-[calc(100%-15px)]">
+    console.log(logo);
+    return <div className="container mx-auto">
+        <div className="navbar my-2 p-0 rounded-md w-full">
             <div className="flex-1">
-                <Link to="/" className="btn btn-ghost text-xl"><p>MBA</p></Link>
+                <Link to="/" className="btn btn-ghost text-xl text-primary"><div className="flex gap-2"><img src={logo} alt="" className="h-5 w-auto m-auto" />medica</div></Link>
             </div>
             <div className="flex-none gap-2">
-                <div className="form-control">
+                {/* <div className="form-control">
                     <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-                </div>
+                </div> */}
                 {!user ?
-                    <button className="btn btn-secondary" onClick={handleOpen} >Login</button>
+                    <button className="btn btn-primary btn-sm px-8 h-5" onClick={handleOpen} >Login</button>
                     :
                     <div className="dropdown dropdown-end mx-5">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -59,5 +60,5 @@ export default function Navbar() {
         </div>
         <ModalLogin modal={modal} user={user} setUser={setUser} />
 
-    </>
+    </div>
 }
