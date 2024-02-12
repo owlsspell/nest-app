@@ -31,8 +31,8 @@ export default function Banner() {
                     </motion.div>
                 ))}
             </div> */}
-            <div className='flex gap-6'>
-                <div className='w-1/2 text-secondary flex'>
+            <div className='flex flex-wrap lg:flex-nowrap gap-6'>
+                <div className='w-full lg:w-1/2 text-secondary flex'>
                     <motion.div className='w-1/2 text-8xl mt-4  mr-2'
                         initial={{ opacity: 0, x: -50, y: -50 }}
                         whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -58,7 +58,7 @@ export default function Banner() {
                             knee joint with a man-made artificial joint.</motion.p>
                     </motion.div>
                 </div>
-                <div className='w-1/2 text-secondary flex'>
+                <div className='w-full lg:w-1/2 text-secondary flex'>
                     <motion.div className='w-1/2 text-8xl mt-4 mr-4'
                         initial={{ opacity: 0, x: -50, y: -50 }}
                         whileInView={{ opacity: 1, x: 0, y: 0 }}

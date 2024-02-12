@@ -16,8 +16,9 @@ export default {
           "primary": "#2B88D9",
           "primary-content": "#fcfeff",
           "secondary": "#ffffff",
-          "secondary-content": "#ffffff",
+          "secondary-content": "#F7F7F7",
           "base-content": "#767676",
+          "neutral": '#F1F8FF',
           "neutral-content": "#767676",
         },
         // chocolate: {
