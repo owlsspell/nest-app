@@ -2,6 +2,8 @@ import React, { Suspense } from 'react'
 import Navbar from '../Dashboard/Navbar'
 import SideBar from '../Dashboard/SideBar'
 import { Outlet } from 'react-router-dom'
+import LineChart from '../Dashboard/Charts/LineChart'
+import PieChart from '../Dashboard/Charts/PieChart'
 
 export default function Dashboard() {
     return (
@@ -15,7 +17,21 @@ export default function Dashboard() {
 
                     <div className='w-full gap-4'>
                         <Navbar />
-                        <div class="backdrop-blur-sm bg-secondary/60 rounded-2xl shadow-lg mt-4"> Dashboard<Outlet /></div>
+                        <div className="backdrop-blur-sm bg-secondary/90 rounded-2xl shadow-lg mt-4"> Dashboard
+                            {/* <LineChart /> */}
+                            {/* <Outlet /> */}
+                            <div className='flex'>
+                                <div className='w-3/4 grid grid-cols-3 gap-4 p-4'>
+                                    <div className='border border-base-content/60 h-60'>
+                                        <PieChart />
+
+                                    </div>
+                                    <div className='border border-base-content/60'></div>
+                                    <div className='border border-base-content/60'></div>
+                                </div>
+                                <div className='w-1/4'>2</div>
+                            </div>
+                        </div>
                     </div>
 
 

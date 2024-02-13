@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { motion } from "framer-motion"
 
 export default function SideBar() {
 
@@ -23,7 +22,7 @@ export default function SideBar() {
     const changePage = (path) => setActive(path)
 
     return (
-        <div className='w-64 h-[calc(100vh-1.5rem)] rounded-2xl backdrop-blur-sm bg-secondary/60 shadow-lg'>
+        <div className='w-64 h-[calc(100vh-1.5rem)] rounded-2xl backdrop-blur-sm bg-secondary/90 shadow-lg'>
 
             <div className="flex items-center gap-4 py-6 px-10">
                 <img src="/icons/logo.png" alt="" className="h-8 w-auto" />
@@ -32,7 +31,7 @@ export default function SideBar() {
             <hr />
             <ul className="py-4 text-base-content px-0 rounded-none">
                 {listMenu.main.map(li =>
-                    <li className='text-black/60'>
+                    <li className='text-black/60' key={li.path}>
                         <div className={`px-8 py-2 cursor-pointer flex items-baseline rounded-none ${li.path === active ? "bg-secondary/40" : ""}`} onClick={() => changePage(li.path)}>
                             {/* <img src="/icons/icon-1.png" alt={li.iconName} /> */}
 
@@ -48,7 +47,7 @@ export default function SideBar() {
             <span className='text-black/60 px-8 font-bold uppercase text-sm'>Account</span>
             <ul className="menu text-base-content px-0 rounded-none">
                 {listMenu.account.map(li =>
-                    <li className='text-black/60'>
+                    <li className='text-black/60' key={li.path}>
                         <a className={`px-8 flex items-baseline rounded-none hover:bg-secondary/40 ${li.path === active ? "bg-secondary/40" : ""}`} onClick={() => changePage(li.path)}>
                             {/* <img src="/icons/icon-1.png" alt={li.iconName} /> */}
                             <img src={`/icons/sidebar/${li.iconName}.png`} alt={li.iconName} className='mr-2' />

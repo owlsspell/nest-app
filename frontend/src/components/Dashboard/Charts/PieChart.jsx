@@ -1,0 +1,87 @@
+import React, { useEffect, useRef, useState } from 'react'
+import * as d3 from "d3";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const ShadowPlugin = {
+    id: 'custom_canvas_background_color',
+    beforeDraw: (chart, args, options) => {
+        const { ctx } = chart;
+        console.log('chart1', ctx.elements.Arc.prototype.draw);
+
+        // console.log('ctx', ctx);
+        ctx.shadowColor = "#f80d386b";
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 5;
+    },
+};
+export const data = {
+    labels: ['Malaria', 'Cold', 'Typhoid', 'Others'],
+    datasets: [
+        {
+            label: '# of Votes',
+            data: [15, 10, 5, 20],
+            backgroundColor: [
+                '#100DB1',
+                '#FECA57',
+                '#763CEF',
+                '#F80D38',
+            ],
+            borderWidth: 0
+        },
+    ],
+
+};
+
+
+export default function PieChart() {
+
+
+    return <Doughnut data={data}
+        plugins={[ShadowPlugin]}
+        className='m-auto p-2' />
+}
+// export default function PieChart() {
+//     const width = 200
+//     const height = 200
+//     const radius = Math.min(width, height) / 2 - 30;
+
+//     const data = [
+//         { name: "Mark", value: 90 },
+//         { name: "Robert", value: 12 },
+//         { name: "Emily", value: 34 },
+//         { name: "Marion", value: 53 },
+//         { name: "Nicolas", value: 98 },
+//     ]
+//     const pieGenerator = d3.pie().value((d) => d.value);
+//     const pie = pieGenerator(data);
+
+//     const arcPathGenerator = d3.arc();
+
+//     const arcs = pie.map((p) =>
+//         arcPathGenerator({
+//             innerRadius: 50,
+//             outerRadius: radius,
+//             startAngle: p.startAngle,
+//             endAngle: p.endAngle,
+//         })
+//     );
+//     const colors = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"];
+
+//     return (
+//         <>
+//             <svg width={width} height={height} style={{ display: "inline-block" }}>
+//                 {/* // render all the arcs */}
+//                 <g transform={`translate(${width / 2}, ${height / 2})`}>
+//                     {arcs.map((arc, i) => {
+
+//                         return <path key={i} d={arc} fill={colors[i]} />;
+//                     })}
+//                 </g>
+//             </svg>
+//         </>
+//     )
+// }

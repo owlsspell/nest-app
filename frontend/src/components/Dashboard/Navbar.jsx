@@ -36,20 +36,20 @@ export default function Navbar() {
         // </div>
         // </div>
 
-        < div className="navbar relative z-[10] backdrop-blur-sm bg-secondary/60 mx-auto px-5 max-w-5xl w-auto rounded-2xl shadow-lg" >
+        < div className="navbar relative z-[10] backdrop-blur-sm bg-secondary/90 mx-auto px-5 w-auto rounded-2xl shadow-lg" >
             <div className="navbar ">
 
                 <div className="flex-1 gap-2">
                     <div className="form-control w-full">
-                        <input type="text" placeholder="Search" className="input input-bordered input-sm p-5 text-secondary bg-transparent border-secondary/60 placeholder:text-secondary/60	" />
+                        <input type="text" placeholder="Search" className="input input-bordered input-sm p-5 bg-transparent" />
                     </div>
                     <div className="dropdown dropdown-end flex items-center min-w-max">
-                        <div className='rounded-full w-4 h-4 border flex'>
+                        <div className='rounded-full cursor-pointer w-6 h-6 mx-2 border border-black/10 bg-secondary flex'>
                             <img src="/icons/notification.png" className='m-auto' />
                         </div>
-                        <div className="divider w-[1px] mx-2 bg-secondary/60"></div>
+                        <div className="divider w-[1px] mx-2 bg-black/10"></div>
                         <div className='flex items-center'>
-                            <div tabIndex={0} role="button" className="mx-2 btn btn-ghost btn-circle avatar w-8">
+                            <div tabIndex={0} role="button" className="mx-2 avatar w-8">
                                 <div className="w-10 rounded-full">
                                     <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                 </div>
