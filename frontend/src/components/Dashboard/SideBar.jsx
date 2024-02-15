@@ -22,7 +22,7 @@ export default function SideBar() {
     const changePage = (path) => setActive(path)
 
     return (
-        <div className='w-64 h-[calc(100vh-1.5rem)] rounded-2xl backdrop-blur-sm bg-secondary/90 shadow-lg'>
+        <div className='w-48 h-[calc(100vh-1.5rem)] rounded-2xl backdrop-blur-sm bg-secondary/90 shadow-lg'>
 
             <div className="flex items-center gap-4 py-6 px-10">
                 <img src="/icons/logo.png" alt="" className="h-8 w-auto" />
