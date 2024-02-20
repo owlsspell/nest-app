@@ -10,13 +10,26 @@ export default function BarChart() {
                 fontSize: 14
             },
         },
-        height: "70%",
+        tooltip: {
+            trigger: 'axis',
+            formatter(params) {
+                const param = params[0]
+                return `${param.marker}${param.name}`;
+            },
+        },
+        // height: '100%',
+        grid: {
+            bottom: '10%',
+            left: 0,
+            right: 0,
+        },
         xAxis: {
             type: 'category',
-            data: ['June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+            data: ['June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
+
         },
         yAxis: {
-            show: false
+            show: false,
         },
         series: [
             {
@@ -26,17 +39,20 @@ export default function BarChart() {
                     borderRadius: [10, 10, 0, 0],
                     width: 5
                 },
+                showSymbol: false,
                 barWidth: '20%',
                 z: 2,
+
             },
             {
-                data: [120, 200, 150, 80, 70, 110, 130],
+                data: [120, 200, 150, 80, 70, 100, 130].map(item => item + 20),
+                // data: [120, 200, 150, 80, 70, 110, 130],
                 type: 'line',
-                stack: 'x',
                 z: 1,
                 lineStyle: {
                     width: 0,
                 },
+                showSymbol: false,
                 areaStyle: {
                     opacity: 1,
                     color: new graphic.LinearGradient(0, 0, 0, 1, [
@@ -56,6 +72,6 @@ export default function BarChart() {
     }
     return (
         <ReactECharts option={option}
-            className='relative h-full' style={{ height: '100%' }} />
+            className='relative h-full' />
     )
 }

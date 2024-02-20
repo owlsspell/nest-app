@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react'
 import ReactECharts from 'echarts-for-react';
-// import { PieChart } from 'echarts/charts';
-
 
 export default function PieChart({ title, data }) {
     const sum = useMemo(() => data.reduce((acc, val) => acc + val.value, 0), [data])
@@ -15,8 +13,6 @@ export default function PieChart({ title, data }) {
         tooltip: {
             trigger: 'item',
             formatter(param) {
-                console.log('param', param);
-                // correct the percentage
                 return `${param.marker}${param.name} - ${param.value} <span style="font-weight: bold">(${param.percent * 2}%</span>)`;
             },
         },
@@ -44,9 +40,8 @@ export default function PieChart({ title, data }) {
         ],
         series: [
             {
-                // name: '',
                 type: 'pie',
-                radius: ['40%', '55%'],
+                radius: ['50%', '65%'],
                 center: ['50%', '50%'],
                 labelLine: {
                     show: false
@@ -56,32 +51,13 @@ export default function PieChart({ title, data }) {
                     shadowColor: '#242e7880',
                     shadowOffsetY: 5,
                 },
-
                 label: {
-                    // show: false,
-                    // backgroundColor: 'inherit',
-                    // color: 'white',
-                    // borderColor: 'inherit',
-                    // fontSize: '12',
-                    // position: 'center',
-                    // formatter: () => {
-                    //     return 'sum'; // Use sum variable here
-                    // },
-                    // normal: {
                     show: true,
                     position: 'center',
                     itemStyle: {
                         borderCap: 'round',
                         borderMiterLimit: 20
                     },
-                    // formatter: function () {  // callback function 
-                    //     // console.log('params', params);
-                    //     // if (params.dataIndex === 0) {
-                    //     //     return params.data[params.dataIndex];
-                    //     // } else { return '4' }
-                    //     // return `<span style="font-size: 25px">${sum}</span> patients`
-                    //     return '{a} {b} {c}'
-                    // }
                     formatter: [
                         `{a|${sum}}`,
                         '{b|patients}'
@@ -96,16 +72,7 @@ export default function PieChart({ title, data }) {
                         },
 
                     }
-                    // },
                 },
-                // emphasis: {
-                //     label: {
-                //         show: true,
-                //         fontSize: 40,
-                //         fontWeight: 'bold'
-                //     },
-
-                // },
                 data
             },
         ]
