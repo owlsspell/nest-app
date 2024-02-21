@@ -15,8 +15,8 @@ export default function HeroSlider() {
                         <br />
                         {"Surgery".split("").map((el, i) => (
                             <motion.span className='text-primary inline-block'
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
+                                initial={{ y: -30, opacity: 0 }}
+                                whileInView={{ y: 0, opacity: 1 }}
                                 transition={{
                                     duration: 0.25,
                                     delay: i / 10,

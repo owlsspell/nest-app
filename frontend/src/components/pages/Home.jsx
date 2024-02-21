@@ -1,7 +1,7 @@
-import HeroMain from './../Hero/HeroMain';
-import HeroSlider from './../Hero/HeroSlider';
-import Doctors from './../Hero/Doctors';
-import Banner from './../Banner';
+import HeroMain from '../Hero/HeroMain';
+import HeroSlider from '../Hero/HeroSlider';
+import Doctors from '../Hero/Doctors';
+import Banner from '../Banner';
 
 export default function Home() {
 

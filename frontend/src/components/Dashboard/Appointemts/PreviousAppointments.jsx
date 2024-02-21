@@ -13,8 +13,8 @@ export default function PreviousAppointments() {
         <div className='mx-2.5 py-3'>
             <div className='text-[14px] font-bold ml-1 mt-1 mb-3 text-black/80'>PREVIOUS APPOINTMENTS</div>
             <div role="tablist" className="flex justify-around mb-3 tabs tabs-boxed border border-base-content/30 p-0">
-                {tabs.map(tab => <div>
-                    <a role="tab" key="tab"
+                {tabs.map(tab => <div key={tab}>
+                    <a role="tab"
                         className='tab font-semibold text-xs text-black'
                         onClick={() => setSelectedTab(tab)}>{tab}</a>
                     {tab === selectedTab ? (

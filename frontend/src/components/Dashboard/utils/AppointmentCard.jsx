@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function AppointmentCard({ data }) {
-    console.log(data);
     const { name, role, avatar } = data
 
     const colorsRole = {

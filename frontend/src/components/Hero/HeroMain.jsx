@@ -11,7 +11,12 @@ export default function HeroMain() {
 
     let count = 0
     function animateText() {
-        if (count === words.length - 1) return count = 0
+        if (count === words.length - 1) {
+            count = 0;
+            setWord(words[0])
+            return
+        }
+
         count++
         setWord(words[count])
     }
@@ -47,7 +52,6 @@ export default function HeroMain() {
                                         repeat: Infinity,
                                         repeatDelay: 0.5,
                                         repeatType: "mirror",
-
                                     }}
                                     key={i}
 

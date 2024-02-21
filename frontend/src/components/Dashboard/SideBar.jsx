@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from "framer-motion"
 
-export default function SideBar() {
+export default function SideBar({ active, setActive, updateSize }) {
 
-    const [active, setActive] = useState("overview")
     const [isOpen, setOpen] = useState(false);
 
     const listMenu = {
@@ -21,7 +20,10 @@ export default function SideBar() {
     }
 
     const changePage = (path) => setActive(path)
-    const handleOpen = () => setOpen(!isOpen)
+    const handleOpen = () => {
+        setOpen(!isOpen)
+        updateSize()
+    }
 
     const variants = {
         open: { width: 50 },
@@ -51,15 +53,11 @@ export default function SideBar() {
                 {listMenu.main.map(li =>
                     <li className='text-black/60' key={li.path}>
                         <motion.div
-                            // whileTap={{ fontWeight: 'bold' }}
-                            // layout
-                            // layoutId='id'
                             animate={isOpen ? { paddingLeft: 15, paddingRight: 15 } : { paddingLeft: 28, paddingRight: 28 }}
-                            className={`cursor-pointer flex items-center rounded-none py-3 hover:bg-secondary/40 ${li.path === active ? "bg-secondary/40" : ""} `}
+                            className={`cursor-pointer flex items-center rounded-none py-3 hover:bg-secondary/40 ${li.path === active ? "bg-secondary/80" : ""} `}
                             onClick={() => changePage(li.path)}>
                             <img src={`/icons/sidebar/${li.iconName}.png`} alt={li.iconName} className='mr-2' />
                             <motion.div
-                                // layout
                                 transition={{ duration: 0.3, delay: 0.3 }}
                                 animate={isOpen ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
                                 className={`text-xs ${li.path === active ? "font-bold text-primary" : ""} `}>{li.title}
@@ -70,7 +68,10 @@ export default function SideBar() {
                 )}
             </ul>
             <motion.span animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                className='text-black/60 px-8 font-bold uppercase text-sm'>Account</motion.span>
+                transition={{ duration: 0.3, delay: 0.3 }}
+                className='text-black/60 px-8 font-bold uppercase text-sm'>
+                Account
+            </motion.span>
             <ul className="menu text-base-content px-0 rounded-none">
                 {listMenu.account.map(li =>
                     <li className='text-black/60' key={li.path}>

@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    /* font-family: "Rosarivo", system-ui, sans-serif; */
+    font-family: "Ubuntu", sans-serif;
   }
   body {
     transition: all 0.8s ease;
@@ -25,8 +25,34 @@
     background-color: #2b88d9;
   }
 
-  /* ползунок скроллбара */
+  /* scrollbar slider */
   ::-webkit-scrollbar-thumb {
     background-color: #ffffff;
   }
+}
+
+/* Callendar */
+:root {
+  --fc-button-bg-color: #2b88d9;
+  --fc-button-border-color: #2b88d9;
+  --fc-button-hover-bg-color: #226dae;
+  --fc-button-hover-border-color: #226dae;
+  --fc-button-active-bg-color: #1d5e96;
+  --fc-button-active-border-color: #1d5e96;
+  --fc-event-bg-color: #3788d8;
+  --fc-event-border-color: #3788d8;
+}
+:root .fc .fc-toolbar-title {
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.735);
+}
+:root .fc .fc-button {
+  font-size: 16px;
+}
+
+:root .fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+:root .fc .fc-button-primary:not(:disabled):active:focus {
+  box-shadow: #2b88d958 0px 0px 0px 0.2rem;
 }
