@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
 
-export default function SideBar({ active, setActive, updateSize }) {
+export default function SideBar({ active, setActive }) {
 
     const [isOpen, setOpen] = useState(false);
 
@@ -22,14 +22,20 @@ export default function SideBar({ active, setActive, updateSize }) {
     const changePage = (path) => setActive(path)
     const handleOpen = () => {
         setOpen(!isOpen)
-        updateSize()
     }
 
     const variants = {
         open: { width: 50 },
         closed: { width: 270 },
     }
-    console.log('active', active);
+
+    useEffect(() => {
+        //for calendar
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 500);
+    }, [isOpen])
+
     return (
         <motion.div
             animate={isOpen ? "open" : "closed"}

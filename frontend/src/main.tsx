@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/layouts/Layout.jsx';
 const Home = React.lazy(() => import("./App.tsx"))

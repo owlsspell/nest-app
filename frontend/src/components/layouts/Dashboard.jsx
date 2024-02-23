@@ -23,9 +23,15 @@ export default function Dashboard() {
 
     const [active, setActive] = useState("overview")
     const callendar = useRef()
-    // const updateSize = () => cconsole.log('callendar.current: ', callendar.current);
+    // const updateSize = () => console.log('callendar.current: ', callendar.current);
 
-    const updateSize = () => callendar.current.updateSize();
+    // const updateSize = () => {
+    //     const calendarApi = callendar.current.getApi()
+    //     console.log('calendarApi', calendarApi);
+    //     calendarApi.updateSize();
+    // }
+
+    // const updateSize = () => callendar.current.updateSize();
     // const updateSize = () => callendar.current.getApi().updateSize()
 
     return (
@@ -34,7 +40,7 @@ export default function Dashboard() {
 
                 <main className='m-3 flex gap-4'>
                     <aside className='h-full sticky top-4'>
-                        <SideBar active={active} setActive={setActive} updateSize={updateSize} />
+                        <SideBar active={active} setActive={setActive} />
                     </aside>
 
                     <div className='w-full gap-4'>
