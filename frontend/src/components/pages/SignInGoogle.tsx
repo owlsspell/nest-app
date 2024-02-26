@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Loader from './../Loader';
 
 export default function SignInGoogle() {
     const [searchParams] = useSearchParams();
@@ -10,6 +11,6 @@ export default function SignInGoogle() {
         navigate('/')
     }, [])
     return (
-        <div>Loading...</div>
+        <Loader />
     )
 }

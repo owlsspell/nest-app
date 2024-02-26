@@ -1,11 +1,14 @@
 import React, { useMemo } from 'react'
 import DoctorCard from './DoctorCard'
+import { WhiteButton } from '../utils/Buttons'
 
-export default function Doctors() {
+export default function Doctors({ setTab }) {
     const doctors = useMemo(() => [
         { id: '1', name: 'Dr. Ibrahim Yekeni', role: 'Heart Surgeon', avatar: '/images/hero.png', appointments: 66, },
         { id: '2', name: 'John', role: 'Doctor', avatar: '', appointments: 26, }
     ], [])
+
+    const goToDoctors = () => setTab('doctors')
 
     return (<>
         <div className='text-[14px] font-bold ml-1 mt-1 mb-3 text-black/80'>DOCTORS</div>
@@ -21,7 +24,7 @@ export default function Doctors() {
         </div>
         {doctors.map(doctor => <DoctorCard data={doctor} key={doctor.id} />)}
 
-        <div className='w-full flex justify-center mt-3 mb-1.5'><button className='btn btn-outline btn-xs border border-base-content/30 text-[14px] px-4 rounded-2xl text-black hover:bg-primary hover:border-none'>GO TO DOCTORS</button></div>
+        <div className='w-full flex justify-center mt-3 mb-1.5'><WhiteButton text="GO TO DOCTORS" action={goToDoctors}></WhiteButton></div>
     </>
     )
 }

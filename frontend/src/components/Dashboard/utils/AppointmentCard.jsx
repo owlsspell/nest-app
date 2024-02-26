@@ -16,7 +16,7 @@ export default function AppointmentCard({ data }) {
                 <div className="flex gap-x-2 items-center">
                     {avatar.length > 0 ?
                         <div className="avatar">
-                            <div className="mask mask-squircle w-6 h-6">
+                            <div className="mask mask-circle w-6 h-6">
                                 <img src={avatar} alt="Avatar Tailwind CSS Component" />
                             </div>
                         </div> :

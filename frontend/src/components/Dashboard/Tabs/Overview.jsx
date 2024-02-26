@@ -9,7 +9,7 @@ import Appointments from '../Appointemts/Appointments'
 import PreviousAppointments from '../Appointemts/PreviousAppointments'
 import TabsContainer from '../utils/TabsContainer'
 
-export default function Overview() {
+export default function Overview({ setTab }) {
     const diagnostics = [
         { value: 580, name: 'MALARIA' },
         { value: 484, name: 'COLD' },
@@ -49,7 +49,7 @@ export default function Overview() {
                         <CandleStick data={causes} />
                     </div>
                     <div className='col-span-3 border border-base-content/30 rounded-lg mb-0 mt-auto h-full px-2 py-2'>
-                        <Doctors />
+                        <Doctors setTab={setTab} />
                     </div>
 
                 </div>

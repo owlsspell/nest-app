@@ -143,7 +143,7 @@ export default function AppointmentsTab({ callendar }) {
     let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
     const eventPopup = useRef()
     const [input, setInput] = useState("")
-
+    const [selectInfo, setSelectInfo] = useState(null)
     const INITIAL_EVENTS = [
         {
             id: createEventId(),
@@ -156,6 +156,9 @@ export default function AppointmentsTab({ callendar }) {
             start: todayStr + 'T12:00:00'
         }
     ]
+    // const [events, setEvents] = useState(INITIAL_EVENTS)
+
+
 
     function createEventId() {
         return String(eventGuid++)
@@ -169,23 +172,25 @@ export default function AppointmentsTab({ callendar }) {
     }
 
     function handleDateSelect(selectInfo) {
+        console.log('selectInfo', selectInfo);
+        setSelectInfo(selectInfo)
         eventPopup.current.showModal()
         // let title = prompt('Please enter a new title for your event')
-        let calendarApi = selectInfo.view.calendar
-        console.log('selectInfo', selectInfo);
+        // let calendarApi = selectInfo.view.calendar
+        // console.log('selectInfo', selectInfo);
         // calendarApi.unselect() // clear date selection
-        console.log('input', input);
-        if (input) {
-            calendarApi.addEvent({
-                id: createEventId(),
-                title,
-                start: selectInfo.startStr + 'T14:00:00',
-                end: selectInfo.endStr,
-                // start: moment().hours(3).minutes(45).format(),
-                // end: moment().add(1, 'days').hours(4).minutes(45).format()
-                allDay: selectInfo.allDay
-            })
-        }
+        // console.log('input', input);
+        // if (input) {
+        //     calendarApi.addEvent({
+        //         id: createEventId(),
+        //         title: input,
+        //         start: selectInfo.startStr + 'T14:00:00',
+        //         end: selectInfo.endStr,
+        //         // start: moment().hours(3).minutes(45).format(),
+        //         // end: moment().add(1, 'days').hours(4).minutes(45).format()
+        //         allDay: selectInfo.allDay
+        //     })
+        // }
     }
 
     function handleEventClick(clickInfo) {
@@ -199,8 +204,29 @@ export default function AppointmentsTab({ callendar }) {
         setCurrentEvents(events)
     }
 
+    const saveTitle = () => {
+        console.log('api', callendar.current.getApi());
+        // let calendarApi = callendar.current.getApi()
+        // console.log('getCurrentData', calendarApi.getCurrentData());
+        if (input) {
+            let calendarApi = selectInfo.view.calendar
+            calendarApi.addEvent({
+                id: createEventId(),
+                title: input,
+                start: selectInfo.startStr + 'T14:00:00',
+                end: selectInfo.endStr,
+                // start: moment().hours(3).minutes(45).format(),
+                // end: moment().add(1, 'days').hours(4).minutes(45).format()
+                allDay: selectInfo.allDay
+            })
+            setInput("")
+        }
+    }
+
+    const handleDateClick = (e) => console.log('e', e);
+
     return (<>
-        <PopupEvent eventPopup={eventPopup} input={input} setInput={setInput} />
+        <PopupEvent eventPopup={eventPopup} input={input} setInput={setInput} saveTitle={saveTitle} />
         <TabsContainer title="Appointments">
             <div className='p-4'>
                 <FullCalendar ref={callendar}
@@ -223,11 +249,14 @@ export default function AppointmentsTab({ callendar }) {
                     dayMaxEvents={true}
                     weekends={weekendsVisible}
                     initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+                    // events={events}
                     select={handleDateSelect}
                     eventContent={renderEventContent} // custom render function
                     eventClick={handleEventClick}
                     eventsSet={handleEvents}
                     eventResize={console.log('resize events')}
+                    eventAdd={function () { console.log('added event') }}
+                    dateClick={handleDateClick}
                 /* you can update a remote database when these fire:
                 eventAdd={function () { }}
                 eventChange={function () { }}
@@ -251,19 +280,20 @@ function renderEventContent(eventInfo) {
     )
 }
 
-const PopupEvent = ({ eventPopup, input, setInput }) => {
+const PopupEvent = ({ eventPopup, input, setInput, saveTitle }) => {
 
     const handleInput = (e) => setInput(e.target.value)
+
     return <>
-        <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>open modal</button>
+        {/* <button className="btn" onClick={() => document.getElementById('my_modal_1').showModal()}>open modal</button> */}
         <dialog id="my_modal_1" ref={eventPopup} className="modal">
             <div className="modal-box">
-                <h3 className="font-bold text-lg">Hello!</h3>
-                <p className="py-4">Press ESC key or click the button below to close</p>
+                <h3 className="font-bold text-lg">Add event</h3>
                 <div className="modal-action">
-                    <input value={input} onChange={handleInput} />
+                    <input value={input} onChange={handleInput} className='border' />
                     <form method="dialog">
                         {/* if there is a button in form, it will close the modal */}
+                        <button className="btn" onClick={saveTitle}>Save</button>
                         <button className="btn">Close</button>
                     </form>
                 </div>
@@ -272,171 +302,3 @@ const PopupEvent = ({ eventPopup, input, setInput }) => {
     </>
 }
 
-
-// import React, { useCallback, useRef } from "react";
-// import { render } from "react-dom";
-
-// import TUICalendar from "@toast-ui/react-calendar";
-// import { ISchedule, ICalendarInfo } from "tui-calendar";
-
-// import "tui-calendar/dist/tui-calendar.css";
-// import "tui-date-picker/dist/tui-date-picker.css";
-// import "tui-time-picker/dist/tui-time-picker.css";
-// import '@toast-ui/calendar/dist/toastui-calendar.min.css';
-
-// const start = new Date();
-// const end = new Date(new Date().setMinutes(start.getMinutes() + 30));
-// const schedules = [
-//     {
-//         calendarId: "1",
-//         category: "time",
-//         isVisible: true,
-//         title: "Study",
-//         id: "1",
-//         body: "Test",
-//         start,
-//         end
-//     },
-//     {
-//         calendarId: "2",
-//         category: "time",
-//         isVisible: true,
-//         title: "Meeting",
-//         id: "2",
-//         body: "Description",
-//         start: new Date(new Date().setHours(start.getHours() + 1)),
-//         end: new Date(new Date().setHours(start.getHours() + 2))
-//     }
-// ];
-
-// const calendars = [
-//     {
-//         id: "1",
-//         name: "My Calendar",
-//         color: "#ffffff",
-//         bgColor: "#9e5fff",
-//         dragBgColor: "#9e5fff",
-//         borderColor: "#9e5fff"
-//     },
-//     {
-//         id: "2",
-//         name: "Company",
-//         color: "#ffffff",
-//         bgColor: "#00a9ff",
-//         dragBgColor: "#00a9ff",
-//         borderColor: "#00a9ff"
-//     }
-// ];
-
-// export default function TuiCalendar() {
-//     const cal = useRef(null);
-
-//     const onClickSchedule = useCallback((e) => {
-//         const { calendarId, id } = e.schedule;
-//         const el = cal.current.calendarInst.getElement(id, calendarId);
-
-//         console.log(e, el.getBoundingClientRect());
-//     }, []);
-
-//     const onBeforeCreateSchedule = useCallback((scheduleData) => {
-//         console.log(scheduleData);
-
-//         const schedule = {
-//             id: String(Math.random()),
-//             title: scheduleData.title,
-//             isAllDay: scheduleData.isAllDay,
-//             start: scheduleData.start,
-//             end: scheduleData.end,
-//             category: scheduleData.isAllDay ? "allday" : "time",
-//             dueDateClass: "",
-//             location: scheduleData.location,
-//             raw: {
-//                 class: scheduleData.raw["class"]
-//             },
-//             state: scheduleData.state
-//         };
-
-//         cal.current.calendarInst.createSchedules([schedule]);
-//     }, []);
-
-//     const onBeforeDeleteSchedule = useCallback((res) => {
-//         console.log(res);
-
-//         const { id, calendarId } = res.schedule;
-
-//         cal.current.calendarInst.deleteSchedule(id, calendarId);
-//     }, []);
-
-//     const onBeforeUpdateSchedule = useCallback((e) => {
-//         console.log(e);
-
-//         const { schedule, changes } = e;
-
-//         cal.current.calendarInst.updateSchedule(
-//             schedule.id,
-//             schedule.calendarId,
-//             changes
-//         );
-//     }, []);
-
-//     function _getFormattedTime(time) {
-//         const date = new Date(time);
-//         const h = date.getHours();
-//         const m = date.getMinutes();
-
-//         return `${h}:${m}`;
-//     }
-
-//     function _getTimeTemplate(schedule, isAllDay) {
-//         var html = [];
-
-//         if (!isAllDay) {
-//             html.push("<strong>" + _getFormattedTime(schedule.start) + "</strong> ");
-//         }
-//         if (schedule.isPrivate) {
-//             html.push('<span class="calendar-font-icon ic-lock-b"></span>');
-//             html.push(" Private");
-//         } else {
-//             if (schedule.isReadOnly) {
-//                 html.push('<span class="calendar-font-icon ic-readonly-b"></span>');
-//             } else if (schedule.recurrenceRule) {
-//                 html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
-//             } else if (schedule.attendees.length) {
-//                 html.push('<span class="calendar-font-icon ic-user-b"></span>');
-//             } else if (schedule.location) {
-//                 html.push('<span class="calendar-font-icon ic-location-b"></span>');
-//             }
-//             html.push(" " + schedule.title);
-//         }
-
-//         return html.join("");
-//     }
-
-//     const templates = {
-//         time: function (schedule) {
-//             console.log(schedule);
-//             return _getTimeTemplate(schedule, false);
-//         }
-//     };
-
-//     return (
-//         <div className="App">
-//             <h1>Welcome to TOAST Ui Calendar</h1>
-
-//             <TUICalendar
-//                 ref={cal}
-//                 height="1000px"
-//                 view="month"
-//                 useCreationPopup={true}
-//                 useDetailPopup={true}
-//                 template={templates}
-//                 calendars={calendars}
-//                 schedules={schedules}
-//                 onClickSchedule={onClickSchedule}
-//                 onBeforeCreateSchedule={onBeforeCreateSchedule}
-//                 onBeforeDeleteSchedule={onBeforeDeleteSchedule}
-//                 onBeforeUpdateSchedule={onBeforeUpdateSchedule}
-//             />
-//         </div>
-//     );
-// }

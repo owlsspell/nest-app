@@ -9,6 +9,7 @@ const Page404 = React.lazy(() => import("./components/pages/Page404"))
 const SignInGoogle = React.lazy(() => import("./components/pages/SignInGoogle.tsx"))
 // import Dashboard from "./components/pages/Dashboard.jsx"
 const Dashboard = React.lazy(() => import("./components/layouts/Dashboard.jsx"))
+import Loader from './components/Loader';
 
 
 const router = createBrowserRouter([
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>,
+    element: <Suspense fallback={<Loader />}><Dashboard /></Suspense>,
     errorElement: <Page404 />,
     // children: [
     // {

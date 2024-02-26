@@ -4,6 +4,8 @@ import SideBar from '../Dashboard/SideBar'
 import Overview from '../Dashboard/Tabs/Overview'
 import { AnimatePresence, motion } from "framer-motion";
 import AppointmentsTab from '../Dashboard/Tabs/AppointmentsTab';
+import Loader from '../Loader';
+import Doctors from '../Dashboard/Tabs/Doctors';
 
 
 const AnimationComponent = ({ component }) => <>
@@ -36,7 +38,7 @@ export default function Dashboard() {
 
     return (
         <div className="overflow-x-auto h-screen w-full min-h-[610px] fixed bg-blend-darken	bg-[#0000001f] bg-[url('/images/background3.png')] bg-center bg-cover no-repeat">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader />}>
 
                 <main className='m-3 flex gap-4'>
                     <aside className='h-full sticky top-4'>
@@ -45,8 +47,9 @@ export default function Dashboard() {
 
                     <div className='w-full gap-4'>
                         <Navbar />
-                        {active === 'overview' && <AnimationComponent component={<Overview />} />}
+                        {active === 'overview' && <AnimationComponent component={<Overview setTab={setActive} />} />}
                         {active === 'appointments' && <AnimationComponent component={<AppointmentsTab callendar={callendar} />} />}
+                        {active === 'doctors' && <AnimationComponent component={<Doctors />} />}
                     </div>
 
 
