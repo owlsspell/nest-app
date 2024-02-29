@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import Navbar from '../Dashboard/Navbar'
 import SideBar from '../Dashboard/SideBar'
 import Overview from '../Dashboard/Tabs/Overview'
@@ -27,6 +27,7 @@ export default function Dashboard() {
 
     const [active, setActive] = useState("overview")
     const callendar = useRef()
+    const page = useRef()
     // const updateSize = () => console.log('callendar.current: ', callendar.current);
 
     // const updateSize = () => {
@@ -37,9 +38,12 @@ export default function Dashboard() {
 
     // const updateSize = () => callendar.current.updateSize();
     // const updateSize = () => callendar.current.getApi().updateSize()
+    useEffect(() => {
+        page.current.scrollTo(0, 0)
+    }, [active])
 
     return (
-        <div className="overflow-x-auto h-screen w-full min-h-[610px] fixed bg-blend-darken	bg-[#0000001f] bg-[url('/images/background3.png')] bg-center bg-cover no-repeat">
+        <div ref={page} className="overflow-x-auto h-screen w-full min-h-[610px] fixed bg-blend-darken	bg-[#0000001f] bg-[url('/images/background3.png')] bg-center bg-cover no-repeat">
             <Suspense fallback={<Loader />}>
 
                 <main className='m-3 flex gap-4'>

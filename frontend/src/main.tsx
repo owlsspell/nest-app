@@ -10,6 +10,8 @@ const SignInGoogle = React.lazy(() => import("./components/pages/SignInGoogle.ts
 // import Dashboard from "./components/pages/Dashboard.jsx"
 const Dashboard = React.lazy(() => import("./components/layouts/Dashboard.jsx"))
 import Loader from './components/Loader';
+import { Provider } from 'react-redux';
+import { store } from './store/state-redux';
 
 
 const router = createBrowserRouter([
@@ -44,7 +46,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
     {/* <App /> */}
   </React.StrictMode>,
 )

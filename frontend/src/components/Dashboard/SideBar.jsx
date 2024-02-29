@@ -20,9 +20,7 @@ export default function SideBar({ active, setActive }) {
     }
 
     const changePage = (path) => setActive(path)
-    const handleOpen = () => {
-        setOpen(!isOpen)
-    }
+    const handleOpen = () => setOpen(!isOpen)
 
     const variants = {
         open: { width: 50 },
