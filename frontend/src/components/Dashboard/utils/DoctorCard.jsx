@@ -7,12 +7,12 @@ export default function DoctorCard({ data }) {
     return (
         <div className="card card-compact bg-base-100/40 border border-base-content/30 px-2 py-3 rounded-xl">
             {avatar.length > 0 ?
-                <div className="avatar">
+                <div className="avatar mt-2">
                     <div className="mask mask-circle w-1/2 m-auto">
                         <img src={avatar} alt="" />
                     </div>
                 </div> :
-                <div className="avatar placeholder">
+                <div className="avatar placeholder mt-2">
                     <div className="bg-base-content text-secondary rounded-full w-1/2 m-auto">
                         <span className="text-md">{name.slice(0, 2).toUpperCase()}</span>
                     </div>

@@ -16,4 +16,7 @@ export class User {
 
   @Column()
   isActive: boolean;
+
+  @Column()
+  accountType?: string;
 }

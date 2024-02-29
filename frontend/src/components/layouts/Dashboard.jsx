@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import AppointmentsTab from '../Dashboard/Tabs/AppointmentsTab';
 import Loader from '../Loader';
 import Doctors from '../Dashboard/Tabs/Doctors';
+import Results from '../Dashboard/Tabs/Results';
+import Settings from '../Dashboard/Tabs/Settings';
 
 
 const AnimationComponent = ({ component }) => <>
@@ -50,6 +52,8 @@ export default function Dashboard() {
                         {active === 'overview' && <AnimationComponent component={<Overview setTab={setActive} />} />}
                         {active === 'appointments' && <AnimationComponent component={<AppointmentsTab callendar={callendar} />} />}
                         {active === 'doctors' && <AnimationComponent component={<Doctors />} />}
+                        {active === 'results' && <AnimationComponent component={<Results />} />}
+                        {active === 'settings' && <AnimationComponent component={<Settings />} />}
                     </div>
 
 

@@ -8,7 +8,7 @@ export default function Doctors({ setTab }) {
         { id: '2', name: 'John', role: 'Doctor', avatar: '', appointments: 26, }
     ], [])
     return (
-        <TabsContainer title="Welcome Boluwatife," text="How’re you feeling today?">
+        <TabsContainer title="Doctors">
             <div className='grid grid-cols-4 gap-3 p-4'>
                 {doctors.map(doctor => <DoctorCard data={doctor} />)}
             </div>
