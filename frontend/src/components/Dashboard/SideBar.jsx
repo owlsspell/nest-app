@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion"
+import { useNavigate } from "react-router-dom";
 
 export default function SideBar({ active, setActive }) {
 
     const [isOpen, setOpen] = useState(false);
+
+    const navigate = useNavigate();
 
     const listMenu = {
         main: [
@@ -11,7 +14,7 @@ export default function SideBar({ active, setActive }) {
             { title: "Appointments", path: "appointments", iconName: "icon-2" },
             { title: "Doctors", path: "doctors", iconName: "icon-3" },
             { title: "Results", path: "results", iconName: "icon-4" },
-            { title: "Chats", path: "chats", iconName: "icon-5" },
+            // { title: "Chats", path: "chats", iconName: "icon-5" },
         ],
         account: [
             { title: "Settings", path: "settings", iconName: "icon-6" },
@@ -19,7 +22,17 @@ export default function SideBar({ active, setActive }) {
         ]
     }
 
-    const changePage = (path) => setActive(path)
+    const changePage = (path) => {
+        console.log('path', path);
+        if (path === 'logout') {
+            // setUser(null)
+            localStorage.removeItem("userData")
+            navigate("/");
+            return
+        }
+
+        setActive(path)
+    }
     const handleOpen = () => setOpen(!isOpen)
 
     const variants = {
