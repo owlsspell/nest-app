@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
-import docktors from '../../../mock_data/doctors.json'
+import doctors from '../../../mock_data/doctors.json'
 
 const doctorsSlice = createSlice({
     name: 'doctors',
-    initialState: docktors,
+    initialState: { doctorsList: doctors },
     reducers: {
         updateDoctorsList: (state, action) => {
-            state.doctors = action.payload
+            state.doctorsList = action.payload
         },
     }
 })
 
-export const { incremented, decremented } = doctorsSlice.actions
+export const { updateDoctorsList } = doctorsSlice.actions
 export default doctorsSlice.reducer
 
 

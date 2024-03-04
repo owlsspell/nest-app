@@ -23,7 +23,6 @@ export default function SideBar({ active, setActive }) {
     }
 
     const changePage = (path) => {
-        console.log('path', path);
         if (path === 'logout') {
             // setUser(null)
             localStorage.removeItem("userData")

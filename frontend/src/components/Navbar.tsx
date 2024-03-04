@@ -19,7 +19,7 @@ export default function Navbar() {
         const userData = localStorage.getItem('userData')
         if (userData) setUser(userData)
     }, [])
-    console.log(logo);
+
     return <div className="container mx-auto">
         <div className="navbar my-2 p-0 rounded-md w-full">
             <div className="flex-1">
@@ -39,19 +39,23 @@ export default function Navbar() {
                             </div>
                         </div>
                         <ul tabIndex={0} className="mt-3 z-[10] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                            <li>
+                            {/* <li>
                                 <a className="justify-between">
                                     Profile
-                                    {/* <span className="badge">New</span> */}
+                                    
                                 </a>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link to="/dashboard" className="justify-between">
                                     Dashboard
                                     <span className="badge">New</span>
                                 </Link>
                             </li>
-                            <li><a>Settings</a></li>
+                            {/* <li>
+                                <Link to="/dashboard" className="justify-between">
+                                    Settings
+                                </Link>
+                            </li> */}
                             <li onClick={logout}><a>Logout</a></li>
                         </ul>
                     </div>

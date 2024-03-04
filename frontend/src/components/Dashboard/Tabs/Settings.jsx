@@ -12,9 +12,8 @@ export default function Settings() {
         return data.data
     })
 
-    console.log('user', user);
     const initialValues = {
-        username: user.username, email: user.email, accountType: "Patient"
+        username: user.username ?? "", email: user.email ?? "", accountType: "Patient"
     }
 
     const ProfileSchema = Yup.object().shape({
@@ -41,38 +40,8 @@ export default function Settings() {
                         initialValues={initialValues}
                         validationSchema={ProfileSchema}
                         onSubmit={async (values, actions) => {
-                            console.log(123, { values, actions });
-
-                            // const { email, password } = values
-                            // actions.setSubmitting(false);
                             const result = await updateUserInfo({ values, id: user.id });
                             console.log('result', result);
-                            // await signInJWT({ email, password }).then(data => {
-                            //     console.log('data', data);
-                            //     modal.current?.close()
-                            //     if (data.status === 401) throw new Error(data.message)
-
-                            //     setUser(data)
-                            //     setToLocalStorage(data)
-                            //     Swal.fire({
-                            //         title: 'Success',
-                            //         icon: "success",
-                            //         timer: 1000,
-                            //     })
-                            //     actions.resetForm()
-                            // }).catch(err => {
-                            //     console.log(console.error(err));
-                            //     modal.current?.close()
-                            //     Swal.fire({
-                            //         title: err.message,
-                            //         icon: "error",
-                            //         timer: 1000,
-                            //     })
-                            //     setTimeout(() => modal.current?.showModal(), 1000)
-                            // })
-
-
-
                         }}
                     >
                         {formikProps => {

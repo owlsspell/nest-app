@@ -22,7 +22,7 @@ export default function PreviousAppointments() {
                     ) : null}
                 </div>)}
             </div>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="sync">
                 <motion.div
                     key={selectedTab ? selectedTab : "empty"}
                     initial={{ y: -10, opacity: 0 }}

@@ -4,7 +4,7 @@ import './index.css'
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/layouts/Layout.jsx';
-const Home = React.lazy(() => import("./App.tsx"))
+const Home = React.lazy(() => import("./App.jsx"))
 const Page404 = React.lazy(() => import("./components/pages/Page404"))
 const SignInGoogle = React.lazy(() => import("./components/pages/SignInGoogle.tsx"))
 // import Dashboard from "./components/pages/Dashboard.jsx"

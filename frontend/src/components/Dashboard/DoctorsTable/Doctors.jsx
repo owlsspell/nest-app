@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import DoctorCard from './DoctorCard'
 import { WhiteButton } from '../utils/Buttons'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,8 @@ export default function Doctors({ setTab }) {
     //     { id: '1', name: 'Dr. Ibrahim Yekeni', role: 'Heart Surgeon', avatar: '/images/hero.png', appointments: 66, },
     //     { id: '2', name: 'John', role: 'Doctor', avatar: '', appointments: 26, }
     // ], [])
-    const storeDoctors = useSelector(state => state.doctors)
+    const storeDoctors = useSelector(state => state.doctors.doctorsList)
+
     const doctors = useMemo(() => storeDoctors.slice(0, 3), [storeDoctors])
     const goToDoctors = () => setTab('doctors')
 
@@ -25,7 +26,7 @@ export default function Doctors({ setTab }) {
             <div className='w-1/5 '>BOOK NEW APPOINTMENTS</div>
             <div className='w-10'></div>
         </div>
-        {doctors.map(doctor => <DoctorCard data={doctor} key={doctor.id} />)}
+        {doctors.map(doctor => <div key={doctor.id || doctor.name}><DoctorCard data={doctor} /></div>)}
 
         <div className='w-full flex justify-center mt-3 mb-1.5'><WhiteButton text="GO TO DOCTORS" action={goToDoctors}></WhiteButton></div>
     </>

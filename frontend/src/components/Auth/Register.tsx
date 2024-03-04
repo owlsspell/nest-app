@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { RefObject, useState } from "react"
 import hidden from "../../assets/icons/hidden.png"
 import google from "../../assets/icons/google.png"
 import { Field, Form, Formik, FormikProps } from "formik"
@@ -10,8 +10,11 @@ import { setToLocalStorage } from "../../services/functions";
 type InputsType = {
     email: string, password: string, confirm: string, agree: boolean,
 }
-
-export default function Register({ modal, setUser }) {
+type LoginProps = {
+    modal: RefObject<HTMLDialogElement | null>,
+    setUser: (user: { username: string, email: string }) => void
+}
+export default function Register({ modal, setUser }: LoginProps) {
 
     const initialValues: InputsType = {
         email: "", password: "", confirm: "", agree: false
@@ -33,7 +36,7 @@ export default function Register({ modal, setUser }) {
         type: "jwt" | "google",
         formikProps: FormikProps<InputsType>
     ) => {
-        const { values, submitForm, setSubmitting } = formikProps;
+        const { values, submitForm } = formikProps;
         console.log(type, values);
 
         const getUserData = async () => {
@@ -55,7 +58,6 @@ export default function Register({ modal, setUser }) {
             initialValues={initialValues}
             validationSchema={SignupSchema}
             onSubmit={async (values, actions) => {
-                console.log(123, { values, actions });
 
                 const { email, password } = values
                 modal.current?.close()
@@ -70,7 +72,7 @@ export default function Register({ modal, setUser }) {
                 })
 
                 await createUser({ email, password }).then(data => {
-                    console.log(data)
+
                     if (data.message === "User already exists") throw new Error(data.message)
                     Swal.fire({
                         title: data.status,
@@ -105,7 +107,7 @@ export default function Register({ modal, setUser }) {
                     <div className="mx-6 mt-4">
 
                         <h3 className="font text-2xl text-white leading-7 pt-2">Create <br />Account</h3>
-                        {/* {console.log(touched, errors, isSubmitting)} */}
+
                         <Input label="Email" field="email" placeholder=" e.g. example@mail.com" />
                         {touched.email && errors.email && <div className="text-xs pt-1 text-white">{errors.email}</div>}
 
@@ -122,8 +124,8 @@ export default function Register({ modal, setUser }) {
                         </label>
                         {touched.agree && errors.agree && <div className="text-xs text-white">{errors.agree}</div>}
 
-                        <button type="button" onClick={(e) => handleButtonClick("jwt", formikProps)} className="btn btn-outline btn-secondary w-full btn-sm my-3 hover:bg-base-100 hover:text-base-content">Create account</button>
-                        <button type="button" onClick={(e) => handleButtonClick("google", formikProps)} className="btn btn-outline btn-secondary w-full btn-sm">
+                        <button type="button" onClick={() => handleButtonClick("jwt", formikProps)} className="btn btn-outline btn-secondary w-full btn-sm my-3 hover:bg-base-100 hover:text-base-content">Create account</button>
+                        <button type="button" onClick={() => handleButtonClick("google", formikProps)} className="btn btn-outline btn-secondary w-full btn-sm">
                             <img src={google} alt="google_icon" />
                             <a className="my-auto pt-1" href={import.meta.env.VITE_SERVER_API + "auth/google"}> Sign Up with Google</a></button>
 

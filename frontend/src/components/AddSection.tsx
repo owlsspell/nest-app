@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function AddSection() {
     return (
         <div className="hero min-h-screen bg-base-100">

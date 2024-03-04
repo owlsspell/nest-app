@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { RefObject, useState } from "react"
 import Swal from "sweetalert2";
 import * as Yup from 'yup';
 import google from "../../assets/icons/google.png"
@@ -10,8 +10,12 @@ import { setToLocalStorage } from "../../services/functions";
 type InputsType = {
     email: string, password: string
 }
+type LoginProps = {
+    modal: RefObject<HTMLDialogElement | null>,
+    setUser: (user: { username: string, email: string }) => void
+}
 
-export default function Login({ modal, setUser }) {
+export default function Login({ modal, setUser }: LoginProps) {
     const initialValues: InputsType = {
         email: "", password: ""
     }
@@ -55,6 +59,20 @@ export default function Login({ modal, setUser }) {
 
                     const { email, password } = values
                     actions.setSubmitting(false);
+
+                    //login as test user
+                    if (email === 'test@gmail.com' && password === 'password') {
+                        setUser({ username: 'Ola Boluwatife', email: 'test@gmail.com' })
+                        setToLocalStorage({ data: { username: 'Ola Boluwatife', email: 'test@gmail.com' } })
+                        modal.current?.close()
+                        Swal.fire({
+                            title: 'Success',
+                            icon: "success",
+                            timer: 1000,
+                        })
+                        actions.resetForm()
+                        return
+                    }
 
                     await signInJWT({ email, password }).then(data => {
                         console.log('data', data);
