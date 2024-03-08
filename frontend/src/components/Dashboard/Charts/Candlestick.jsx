@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import ReactECharts from 'echarts-for-react';
 
-export default function CandleStick({ data }) {
+export default function CandleStickChart({ data }) {
 
     const maximumValue = useMemo(() => Math.max(...data.map(item => item.value)), [data])
 
