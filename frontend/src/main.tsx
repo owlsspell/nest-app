@@ -7,7 +7,6 @@ import Layout from './components/layouts/Layout.jsx';
 const Home = React.lazy(() => import("./App.jsx"))
 const Page404 = React.lazy(() => import("./components/pages/Page404"))
 const SignInGoogle = React.lazy(() => import("./components/pages/SignInGoogle.tsx"))
-// import Dashboard from "./components/pages/Dashboard.jsx"
 const Dashboard = React.lazy(() => import("./components/layouts/Dashboard.jsx"))
 import Loader from './components/Loader';
 import { Provider } from 'react-redux';

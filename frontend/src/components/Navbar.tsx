@@ -17,7 +17,7 @@ export default function Navbar() {
     }
     useEffect(() => {
         const userData = localStorage.getItem('userData')
-        if (userData) setUser(userData)
+        if (userData) setUser(userData as any)
     }, [])
 
     return <div className="container mx-auto">

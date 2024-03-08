@@ -135,6 +135,14 @@ export default function Login({ modal, setUser }: LoginProps) {
     )
 }
 
+
+type InputType = {
+    type?: string,
+    placeholder?: string,
+    label?: string,
+    field: string,
+}
+
 function Input({ type = 'text', placeholder = "", label, field }: InputType) {
     const [isHidden, toogleHidden] = useState(true)
 

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState, FunctionComponent } from 'react'
 import Navbar from '../Dashboard/Navbar'
 import SideBar from '../Dashboard/SideBar'
 import Overview from '../Dashboard/Tabs/Overview'
