@@ -79,7 +79,7 @@ export default function AppointmentsChart() {
         ]
     }
     return (
-        <div className="h-72 p-2">
+        <div className="h-96 md:h-72 p-2">
             <ReactECharts option={option}
                 className='relative h-full' style={{ height: '100%' }} />
         </div>

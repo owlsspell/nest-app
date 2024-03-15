@@ -32,7 +32,7 @@ export default function Overview({ setTab }) {
     return (
         <TabsContainer title="Welcome Boluwatife," text="How’re you feeling today?">
             <div className='flex'>
-                <div className='w-4/6 max-h-80 grid grid-cols-3 gap-4 p-4'>
+                <div className='w-1/2 md:w-4/6 h-full md:max-h-80 grid grid-cols-1 md:w-full md:grid-cols-3  gap-4 p-4'>
                     <div className='border border-base-content/30 px-2 py-3 rounded-lg'>
                         <PieChart title='DIAGNOSTICS' data={diagnostics} />
                     </div>
@@ -42,18 +42,18 @@ export default function Overview({ setTab }) {
                     <div className='border border-base-content/30 rounded-lg mb-0 mt-auto h-full px-2 py-2'>
                         <BarChart />
                     </div>
-                    <div className='col-span-2 border border-base-content/30 rounded-lg mb-0 mt-auto h-full px-2 py-2'>
+                    <div className='col-span-1 md:col-span-2 border border-base-content/30 rounded-lg mb-0 mt-auto h-full px-2 py-2'>
                         <MapChart />
                     </div>
                     <div className='border border-base-content/30 rounded-lg mb-0 mt-auto h-full px-2 py-2'>
                         <CandleStick data={causes} />
                     </div>
-                    <div className='col-span-3 border border-base-content/30 rounded-lg mb-0 mt-auto h-full px-2 py-2'>
+                    <div className='hidden md:block col-span-1 md:col-span-3 border border-base-content/30 rounded-lg mb-0 mt-auto h-full px-2 py-2'>
                         <Doctors setTab={setTab} />
                     </div>
 
                 </div>
-                <div className='w-2/6 py-4 pr-4'>
+                <div className='w-1/2 md:w-2/6 py-4 pr-4'>
                     <div className="border border-base-content/30 rounded-t-lg">
                         <AppointmentsChart />
                     </div>

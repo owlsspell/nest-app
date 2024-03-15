@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import ReactECharts from 'echarts-for-react';
 
-export default function PieChart({ title, data }) {
+function PieChart({ title, data }) {
     const sum = useMemo(() => data.reduce((acc, val) => acc + val.value, 0), [data])
     const option = {
         title: {
@@ -78,7 +78,6 @@ export default function PieChart({ title, data }) {
         ]
     };
 
-
     return (
         <div>
             <ReactECharts option={option}
@@ -87,6 +86,7 @@ export default function PieChart({ title, data }) {
     )
 }
 
+export default React.memo(PieChart)
 
 
 // import React, { useEffect, useRef, useState } from 'react'
