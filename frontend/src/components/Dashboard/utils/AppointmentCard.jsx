@@ -11,8 +11,8 @@ export default function AppointmentCard({ data }) {
         'Sick Visit': '#2798F7',
     }
     return (
-        <div className='flex my-2 p-3 items-center justify-between gap-x-2 text-[14px] font-bold text-black border border-base-content/30 py-2 rounded-lg overflow-x-auto text-center'>
-            <div className='w-1/2'>
+        <div className='flex flex-wrap lg:flex-nowrap my-2 p-3 items-center justify-between text-[14px] font-bold text-black border border-base-content/30 py-2 rounded-lg overflow-x-auto text-center'>
+            <div className='my-auto'>
                 <div className="flex gap-x-2 items-center">
                     {avatar.length > 0 ?
                         <div className="avatar">
@@ -32,8 +32,8 @@ export default function AppointmentCard({ data }) {
 
                 </div>
             </div>
-            <div className='flex flex-col items-end'>
-                <div className='pb-0.5'><button>...</button></div>
+            <div className='w-full flex flex-col items-end'>
+                <div className=' pb-0.5'><button>...</button></div>
                 <div className='font-normal'>Tuesday, October 24</div>
             </div>
         </div>

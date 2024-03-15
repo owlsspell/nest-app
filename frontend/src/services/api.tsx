@@ -29,7 +29,11 @@ export const createUser = (userData: UserData) => {
 }
 
 export const submitGoggle = () => {
-    return axios.get(import.meta.env.VITE_SERVER_API + 'auth/google').then((response) => response.data)
+    try {
+        return axios.get(import.meta.env.VITE_SERVER_API + 'auth/google').then((response) => response.data)
+    } catch (e: any) {
+        return new Error(e.error)
+    }
 }
 
 export const signInJWT = (userData: UserData) => {

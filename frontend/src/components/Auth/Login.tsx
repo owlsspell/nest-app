@@ -45,7 +45,13 @@ export default function Login({ modal, setUser }: LoginProps) {
             }
         }
 
-        await getUserData()
+        await getUserData().catch((err) => {
+            Swal.fire({
+                title: err.message,
+                icon: "error",
+                timer: 1000,
+            })
+        })
     }
 
     return (

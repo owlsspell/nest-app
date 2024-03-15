@@ -39,8 +39,8 @@ export default function Navbar() {
         < div className="navbar relative z-[10] backdrop-blur-sm bg-secondary/90 mx-auto px-5 w-auto rounded-2xl shadow-lg" >
             <div className="navbar ">
 
-                <div className="flex-1 gap-2">
-                    <div className="form-control w-full">
+                <div className="flex-1 gap-2 justify-between">
+                    <div className="form-control hidden md:flex">
                         <input type="text" placeholder="Search" className="input input-bordered input-sm p-5 bg-transparent" />
                     </div>
                     <div className="dropdown dropdown-end flex items-center min-w-max">
